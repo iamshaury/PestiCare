@@ -1,18 +1,20 @@
-import React from 'react';
-
-const navLinks = [
-  { href: "#", label: "Home" },
-  { href: "#", label: "How It Works" },
-  { href: "#", label: "Contact" },
-  { href: "#", label: "Privacy Policy" },
-  { href: "#", label: "Terms of Service" },
-];
+import React from "react";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
+
+  const navLinks = [
+    { href: "#", label: t("home") },
+    { href: "#", label: t("howItWorks") },
+    { href: "#", label: t("contact") },
+    { href: "#", label: t("privacyPolicy") },
+    { href: "#", label: t("termsOfService") },
+  ];
+
   return (
     <footer className="bg-white border-t border-green-200 mt-20 pt-10 pb-4 text-gray-700">
       <div className="max-w-6xl mx-auto px-4 flex flex-col md:flex-row md:justify-between md:items-start gap-10">
-        {/* Logo and About */}
         <div className="flex flex-col items-center md:items-start gap-2 md:w-1/3 text-center md:text-left">
           <div className="flex items-center gap-2 mb-2 justify-center md:justify-start">
             <span
@@ -42,20 +44,25 @@ const Footer = () => {
             </span>
           </div>
           <p className="text-gray-500 max-w-xs">
-            Empowering farmers with AI-driven plant disease detection and care.<br />
-            Made with <span className="text-red-600 font-bold animate-pulse">❤</span> for farmers.
+            {t("footerDesc")}
+            <br />
+            {t("footerLove")}
           </p>
           <div className="mt-3 text-sm text-gray-400">
-            <strong>Contact:</strong> support@pesticare.com<br />
-            <strong>Address:</strong> KIET GROUP OF INSTITUTIONS, GHAZIABAD
+            <strong>{t("contact")}:</strong> support@pesticare.com
+            <br />
+            <strong>{t("address")}:</strong> KIET GROUP OF INSTITUTIONS,
+            GHAZIABAD
           </div>
         </div>
 
         {/* Navigation Links */}
         <div className="flex flex-col items-center md:items-start gap-2 md:w-1/4 text-center md:text-left">
-          <span className="font-semibold text-green-700 mb-1">Quick Links</span>
+          <span className="font-semibold text-green-700 mb-1">
+            {t("quickLinks")}
+          </span>
           <nav className="flex flex-col gap-1">
-            {navLinks.map(link => (
+            {navLinks.map((link) => (
               <a
                 key={link.label}
                 href={link.href}
@@ -66,16 +73,15 @@ const Footer = () => {
             ))}
           </nav>
         </div>
-        {/* Removed Connect with us / Social Media section */}
       </div>
 
       <div className="mt-8 border-t border-green-100 pt-4 text-center text-gray-400 text-sm flex flex-col items-center gap-2">
-        © {new Date().getFullYear()} PestiCare. All rights reserved.
+        © {new Date().getFullYear()} PestiCare. {t("allRightsReserved")}
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           className="mt-1 px-3 py-1 bg-green-100 text-green-700 rounded hover:bg-green-200 transition text-xs"
         >
-          ↑ Back to top
+          ↑ {t("backToTop")}
         </button>
       </div>
       <style>{`

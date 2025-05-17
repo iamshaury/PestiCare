@@ -1,12 +1,29 @@
-# React + Vite
+PestiCare – AI-Powered Pest & Disease Detection for Farmers.
+<br>
+Team ZeroBit | Members: Nikhil (Team Leader), Shaury Chaudhary, Ramji Awasthi
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Description:
+PestiCare is an AI-driven mobile solution designed to help farmers quickly detect plant diseases and pests using their phone cameras. The app leverages machine learning models to analyze crop images locally or via a lightweight backend, delivering fast, accurate diagnoses even in low-connectivity rural areas.
 
-Currently, two official plugins are available:
+Key Features:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Offline Image Capture & Analysis: Works without internet access.
 
-## Expanding the ESLint configuration
+Instant Detection: Identifies pests and diseases in real-time.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Localized Treatment Advice: Offers sustainable and region-specific solutions.
+
+Preventive Tips: Provides suggestions to avoid future infections.
+
+Local Language Support: Ensures accessibility for native-language speakers.
+
+Community Support (Optional): Connects farmers for shared learning and help.
+
+Scalability:
+The platform is built to scale regionally by adapting to local pest profiles. Future upgrades may include features like soil health checks, market price trends, and weather integration.
+
+Impact:
+By offering accessible, intelligent pest and disease detection, PestiCare empowers farmers to take timely action, reducing crop loss and improving agricultural productivity.
+
+
+

@@ -2,10 +2,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 const Navbar = () => {
-  const { i18n } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState(i18n.language);
   const [scrolled, setScrolled] = useState(false);
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -38,11 +39,14 @@ const Navbar = () => {
     setDropdownOpen(false);
   };
 
+  // Close mobile menu on navigation
+  const handleNavClick = () => setMobileMenuOpen(false);
+
   return (
     <div className="relative" ref={dropdownRef}>
       <header
-        className={`sticky top-0 z-30 flex items-center justify-between py-4 px-8 
-          bg-white border-b border-gray-200 
+        className={`sticky top-0 z-30 flex items-center justify-between py-4 px-4 sm:px-8
+          bg-white border-b border-gray-200
           transition-all duration-300 ${
             scrolled
               ? "shadow-xl backdrop-blur-md"
@@ -78,31 +82,33 @@ const Navbar = () => {
             PestiCare
           </span>
         </div>
-        <nav className="flex gap-8 text-base items-center">
+
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex gap-8 text-base items-center">
           <a
             href="#"
             className="text-gray-900 no-underline transition-colors duration-200 hover:text-green-700 hover:underline"
           >
-            Home
+            {t("home")}
           </a>
           <a
             href="#"
             className="text-gray-900 no-underline transition-colors duration-200 hover:text-green-700 hover:underline"
           >
-            How It Works
+            {t("howItWorks")}
           </a>
           <a
             href="#"
             className="text-gray-900 no-underline transition-colors duration-200 hover:text-green-700 hover:underline"
           >
-            Contact
+            {t("contact")}
           </a>
           <div className="relative">
             <button
               onClick={() => setDropdownOpen((open) => !open)}
               className="px-3 py-1 bg-green-100 text-green-800 rounded-md shadow-sm hover:bg-green-200 transition-colors duration-200 focus:outline-none"
             >
-              🌐 Language
+              🌐 {t("language")}
             </button>
             {dropdownOpen && (
               <div className="absolute right-0 mt-2 w-32 bg-white border border-gray-200 rounded-md shadow-lg z-50 animate-fade-in-up">
@@ -130,7 +136,95 @@ const Navbar = () => {
             )}
           </div>
         </nav>
+
+        {/* Hamburger for Mobile */}
+        <button
+          className="md:hidden flex flex-col justify-center items-center w-10 h-10 rounded hover:bg-green-100 transition"
+          onClick={() => setMobileMenuOpen((open) => !open)}
+          aria-label="Open menu"
+        >
+          <span className="block w-6 h-0.5 bg-green-700 mb-1"></span>
+          <span className="block w-6 h-0.5 bg-green-700 mb-1"></span>
+          <span className="block w-6 h-0.5 bg-green-700"></span>
+        </button>
       </header>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="fixed inset-0 z-40 bg-black/40 flex flex-col items-end md:hidden">
+          <div
+            className="w-3/4 max-w-xs bg-white h-full shadow-lg p-6 flex flex-col gap-6"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="self-end text-2xl text-gray-500 hover:text-green-700 mb-4"
+              onClick={() => setMobileMenuOpen(false)}
+              aria-label="Close menu"
+            >
+              ×
+            </button>
+            <a
+              href="#"
+              className="text-gray-900 text-lg font-semibold no-underline hover:text-green-700 hover:underline"
+              onClick={handleNavClick}
+            >
+              {t("home")}
+            </a>
+            <a
+              href="#"
+              className="text-gray-900 text-lg font-semibold no-underline hover:text-green-700 hover:underline"
+              onClick={handleNavClick}
+            >
+              {t("howItWorks")}
+            </a>
+            <a
+              href="#"
+              className="text-gray-900 text-lg font-semibold no-underline hover:text-green-700 hover:underline"
+              onClick={handleNavClick}
+            >
+              {t("contact")}
+            </a>
+            <div className="relative">
+              <button
+                onClick={() => setDropdownOpen((open) => !open)}
+                className="px-3 py-1 bg-green-100 text-green-800 rounded-md shadow-sm hover:bg-green-200 transition-colors duration-200 focus:outline-none w-full text-left"
+              >
+                🌐 {t("language")}
+              </button>
+              {dropdownOpen && (
+                <div className="absolute left-0 mt-2 w-32 bg-white border border-gray-200 rounded-md shadow-lg z-50 animate-fade-in-up">
+                  <button
+                    onClick={() => switchLanguage("en")}
+                    className={`block w-full text-left px-4 py-2 transition-colors duration-150 ${
+                      selectedLanguage === "en"
+                        ? "bg-green-300 text-green-700 font-semibold"
+                        : "hover:bg-green-50 hover:text-green-700"
+                    }`}
+                  >
+                    English
+                  </button>
+                  <button
+                    onClick={() => switchLanguage("hi")}
+                    className={`block w-full text-left px-4 py-2 transition-colors duration-150 ${
+                      selectedLanguage === "hi"
+                        ? "bg-green-300 text-green-700 font-semibold"
+                        : "hover:bg-green-50 hover:text-green-700"
+                    }`}
+                  >
+                    हिंदी
+                  </button>
+                </div>
+              )}
+            </div>
+          </div>
+          {/* Click outside to close */}
+          <div
+            className="flex-1 w-full"
+            onClick={() => setMobileMenuOpen(false)}
+            aria-label="Close menu"
+          />
+        </div>
+      )}
 
       <style>{`
         @keyframes bounce {
